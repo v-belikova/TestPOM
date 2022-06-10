@@ -26,7 +26,7 @@ abstract class BaseTest {
         WebDriverRunner.closeWebDriver();   //метод настройки браузера закрывается
     }
 }
-
+k,,
 
 // allure generate --clean --output /Users/dunice/Desktop/NewsFeedAutotests/allure-results
 // allure serve -h localhost
