@@ -1,6 +1,7 @@
 import com.codeborne.selenide.Selenide;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.open;
 
 public class AuthorizationTest extends BaseTest {
@@ -17,7 +18,7 @@ public class AuthorizationTest extends BaseTest {
     @Test
     public void negativeAuthorizationTest(){
         open(BASE_URL);
-
+        authorizationPage.authorizationUserNegative();
     }
 }
 
