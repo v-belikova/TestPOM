@@ -5,7 +5,16 @@ import org.openqa.selenium.By;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.text;
+
 public class MyProfilePage {
+    public String getMyProfileURL() {
+        return myProfileURL;
+    }
+    public void setMyProfileURL(String myProfileURL) {
+        this.myProfileURL = myProfileURL;
+    }
+    private String myProfileURL = "https://news-feed-2.dunice-testing.com/profile/";
     String avatar1 = "src/main/resources/avatar1.png";
     String picture = "src/main/resources/picture.jpeg";
     File file = new File(new File(avatar1).getAbsolutePath());
@@ -15,6 +24,7 @@ public class MyProfilePage {
     private SelenideElement loginNew = Selenide.$(By.name("name"));
     private SelenideElement avatarInputNew = Selenide.$(By.name("avatar"));
     private SelenideElement buttonSave = Selenide.$x("*//button[contains(text(),'Save')]");
+    private SelenideElement stringError = Selenide.$(By.cssSelector(".alert-danger"));
     private SelenideElement newPost = Selenide.$x("*//button[contains(text(),'New Post')]");
     private SelenideElement deleteUser = Selenide.$x("*//button[contains(text(),'Delete profile')]");
     private SelenideElement createNewUserPost = Selenide.$(By.cssSelector(".modal-content"));
@@ -24,8 +34,10 @@ public class MyProfilePage {
     private SelenideElement postTags = Selenide.$(By.name("tags"));
 
     private SelenideElement updateUserPost = Selenide.$(By.cssSelector(".UpdatePost_button__2Hgrx"));
+    private SelenideElement stringErrorTags = Selenide.$(By.cssSelector(".alert-danger"));
 
     private SelenideElement deleteUserPost = Selenide.$x("*//button[contains(text(),'Update')]");
+
 
     private SelenideElement quitSingOut = Selenide.$x("*//button[contains(text(),'Sing Out')]");
 
@@ -37,10 +49,18 @@ public class MyProfilePage {
         avatarInputNew.shouldBe(Condition.visible).uploadFile(file);
         buttonSave.click();
     }
-    public  void setDeleteUser(){
+    public  void negativeUpdateUser(){
+        updateUser.click();
+        emailNew.setValue("losk");
+        loginNew.setValue("222222");
+        avatarInputNew.shouldBe(Condition.visible).uploadFile(file);
+        buttonSave.click();
+        stringError.shouldBe(Condition.visible).shouldHave(text("unknown"));
+
+    }
+    public  void deleteUser(){
         deleteUser.click();
         Selenide.switchTo().alert().accept();
-
 
     }
     public void createNewPost() {
@@ -52,12 +72,30 @@ public class MyProfilePage {
         postTags.sendKeys("#world");
         buttonSave.click();
     }
+    public void negativeCreateNewPost() {
+        newPost.click();
+        createNewUserPost.shouldBe(Condition.visible);
+        postTitle.sendKeys("Hello!");
+        postBody.sendKeys("Hello, world!");
+        pictureBody.shouldBe(Condition.visible).uploadFile(file1);
+        postTags.sendKeys("    ");
+        buttonSave.click();
+        stringError.shouldBe(Condition.visible).shouldHave(text("TAGS_NOT_VALID"));
+
+    }
     public void updatePost(){
         updateUserPost.click();
         postBody.sendKeys("Hello!");
         buttonSave.click();
         updateUserPost.click();
     }
+    public void negativeUpdatePost() {
+        updateUserPost.click();
+        postTags.sendKeys("    ");
+        buttonSave.click();
+        stringError.shouldBe(Condition.visible).shouldHave(text("TAGS_NOT_VALID"));
+    }
+
     public void deletePost(){
         deleteUserPost.click();
     }

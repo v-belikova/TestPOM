@@ -6,12 +6,22 @@ import org.openqa.selenium.By;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AuthorizationPage {
+    Method method = new Method();
+    public String getBase_url() {
+        return Base_url;
+    }
+    public void setBase_url(String base_url) {
+        Base_url = base_url;
+    }
+    private  String Base_url = "https://news-feed-2.dunice-testing.com/";
+
     String avatar = "src/main/resources/avatar.jpeg";
+
     File file = new File(new File(avatar).getAbsolutePath());
     private SelenideElement buttonSign = Selenide.$x("*//button[contains(text(),'Sign Up')]");
     private SelenideElement regTitle = $(By.cssSelector(".modal-content"));
@@ -84,7 +94,11 @@ public class AuthorizationPage {
 
     private SelenideElement selectPost = Selenide.$(By.name("select"));
 
-    private final ElementsCollection postALL = $$(By.cssSelector(".MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root Post_posts__1Y3K- css-w88nxk"));
+    public ElementsCollection getPostALL() {
+        return postALL;
+    }
+
+    private final ElementsCollection postALL = Selenide.$$x("//*[@class ='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root Post_posts__1Y3K- css-w88nxk']");
 
     private SelenideElement selectPostTeg = Selenide.$x("//option[contains(text(),'Tags')]");
 
@@ -93,18 +107,33 @@ public class AuthorizationPage {
     public SelenideElement getHelloHeader() {
         return helloHeader;
     }
-    private SelenideElement helloHeader = $(By.cssSelector(".Header_header__greetings__3WI4_"));
+    private SelenideElement helloHeader = Selenide.$(By.cssSelector(".Header_header__greetings__3WI4_"));
+    private SelenideElement elementOnPage = Selenide.$(By.cssSelector(".MuiTypography-root"));
+
+
 
 
     public void registrationForm() {
         buttonSign.click();
         regTitle.shouldBe(Condition.visible);
         emailInput.setValue("123@mail.ru");
+        loginInput.setValue("123456");
+        passwordInput.setValue("000000");
+        avatarInput.shouldBe(Condition.visible).uploadFile(file);
+        buttonSave.click();
+
+    }
+    public void negativeRegistrationForm() {
+        buttonSign.click();
+        regTitle.shouldBe(Condition.visible);
+        emailInput.setValue("123");
         loginInput.setValue("1234567");
         passwordInput.setValue("000000");
         avatarInput.shouldBe(Condition.visible).uploadFile(file);
         buttonSave.click();
+        alertError.shouldBe(Condition.visible).shouldHave(text("user email must be a well-formed email address"));
     }
+
 
     public void authorizationUser() {
         emailInputUser.setValue("123@mail.ru");
@@ -112,24 +141,14 @@ public class AuthorizationPage {
         buttonLogin.click();
         helloHeader.shouldHave(text("Hello,"), text("1234567"));
 
-        // assertEquals(("Hello," + getLoginInput()),getHelloHeader().getText());
     }
 
     public void authorizationUserNegative() {
-        emailInputUser.setValue("1234@mail.ru");
-        passwordInputLoginUser.setValue("000001");
-        buttonLogin.click();
-        alertError.shouldBe(Condition.visible).shouldHave(text("Password not valid"));
-
-    }
-    public void authorizationUserNegative1() {
         emailInputUser.setValue("123@mail.ru");
         passwordInputLoginUser.setValue("000001");
         buttonLogin.click();
-        alertError.shouldBe(Condition.visible);
-        alertError.shouldHave(text("Password not valid"));
+        alertError.shouldBe(Condition.visible).shouldHave(text("Password not valid"));
     }
-
 
     public void infoMyProfile() {
         stringMyProfile.click();
@@ -137,17 +156,24 @@ public class AuthorizationPage {
 
     public void allPost() {
         for (int i = 0; i < 100; ++i) {
-            postALL.get(i).scrollIntoView(true);
+            getPostALL().get(i).scrollIntoView(true);
         }
     }
-
-        public void postOne() {
-            selectPost.click();
-            selectPostTeg.click();
-            inputSearch.setValue("#море");
-            buttonSearch.click();
-        }
+    public void postOne() {
+        selectPost.click();
+        selectPostTeg.click();
+        inputSearch.setValue("#tag");
+        buttonSearch.click();
+        elementOnPage.shouldBe(exist);
     }
+    public void negativePostOne() {
+        selectPost.click();
+        selectPostTeg.click();
+        inputSearch.setValue("1b4f");
+        buttonSearch.click();
+        elementOnPage.shouldNotBe(visible);
+    }
+}
 
 
 

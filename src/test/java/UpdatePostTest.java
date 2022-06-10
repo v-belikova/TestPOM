@@ -16,4 +16,12 @@ public class UpdatePostTest extends BaseTest  {
         myProfile.createNewPost();
         myProfile.updatePost();
     }
+    @Test
+    public void negativeUpdatePost() {
+        open(BASE_URL);
+        authorizationPage.authorizationUser();
+        authorizationPage.infoMyProfile();
+        myProfile.createNewPost();
+        myProfile.negativeUpdatePost();
+    }
 }

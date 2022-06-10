@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Selenide;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -12,5 +13,7 @@ public class AllPostsTest extends BaseTest  {
     public void allPost() {
         open(BASE_URL);
         authorizationPage.allPost();
-    }
-}
+            }
+        }
+
+

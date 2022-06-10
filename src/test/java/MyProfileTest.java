@@ -9,9 +9,10 @@ public class MyProfileTest extends BaseTest  {
 
 
     @Test
-    public void loginIn() {
+    public void MyProfile() throws InterruptedException {
         open(BASE_URL);
         authorizationPage.authorizationUser();
         authorizationPage.infoMyProfile();
+        Thread.sleep(2000);
     }
 }

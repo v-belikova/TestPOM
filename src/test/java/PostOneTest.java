@@ -13,4 +13,10 @@ public class PostOneTest extends BaseTest  {
         open(BASE_URL);
         authorizationPage.postOne();
     }
+    @Test
+    public void negativePostOne() throws InterruptedException {
+        open(BASE_URL);
+        authorizationPage.negativePostOne();
+    }
+
 }

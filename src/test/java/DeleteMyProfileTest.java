@@ -7,13 +7,11 @@ public class DeleteMyProfileTest extends BaseTest  {
     AuthorizationPage authorizationPage = new AuthorizationPage();
     MyProfilePage myProfile = new MyProfilePage();
 
-
     @Test
     public void deleteProfile() {
         open(BASE_URL);
         authorizationPage.authorizationUser();
         authorizationPage.infoMyProfile();
-        myProfile.setDeleteUser();
-
+        myProfile.deleteUser();
     }
 }

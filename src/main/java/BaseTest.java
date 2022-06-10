@@ -27,5 +27,6 @@ abstract class BaseTest {
     }
 }
 
+
 // allure generate --clean --output /Users/dunice/Desktop/NewsFeedAutotests/allure-results
 // allure serve -h localhost

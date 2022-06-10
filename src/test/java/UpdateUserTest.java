@@ -15,5 +15,13 @@ public class UpdateUserTest extends BaseTest  {
         authorizationPage.infoMyProfile();
         myProfile.updateUser();
     }
+    @Test
+    public void negativeUpdateUser() throws InterruptedException {
+        open(BASE_URL);
+        authorizationPage.authorizationUser();
+        authorizationPage.infoMyProfile();
+        myProfile.negativeUpdateUser();
+        Thread.sleep(5000);
+    }
 }
 

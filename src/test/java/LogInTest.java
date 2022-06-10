@@ -14,8 +14,10 @@ public class LogInTest extends BaseTest  {
         open(BASE_URL);
         authorizationPage.authorizationUser();
     }
-    public void negativeLoginIn(){
+    @Test
+    public void negativeAuthorizationTest(){
         open(BASE_URL);
+        authorizationPage.authorizationUserNegative();
     }
-
 }
+
