@@ -1,4 +1,8 @@
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -9,6 +13,12 @@ public class LogInTest extends BaseTest  {
     AuthorizationPage authorizationPage = new AuthorizationPage();
     MyProfilePage myProfile = new MyProfilePage();
     LogInTest login = new LogInTest();
+
+
+    @Epic(value = "AuthorizationPage")
+    @Feature("Login.")
+    @Story("Valid Login.")
+    @Description("Validating an authorized user's input")
 
     @Test
     public void loginIn() {

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
 public class AuthorizationPage {
@@ -110,6 +111,7 @@ public class AuthorizationPage {
         return helloHeader;
     }
     private SelenideElement helloHeader = Selenide.$(By.cssSelector(".Header_header__greetings__3WI4_"));
+
     private SelenideElement elementOnPage = Selenide.$(By.cssSelector(".MuiTypography-root"));
 
 
@@ -178,4 +180,9 @@ public class AuthorizationPage {
         inputSearch.setValue("1b4f");
         buttonSearch.click();
     }
+    /*public void allPostPagination(){
+        selectPost.click();
+        inputSearch.setValue("Header 1 sd");
+        postALL.findBy(text("Header 1 sd")).click();
+    }*/
 }

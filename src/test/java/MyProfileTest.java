@@ -1,4 +1,8 @@
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -8,6 +12,10 @@ public class MyProfileTest extends BaseTest  {
     AuthorizationPage authorizationPage = new AuthorizationPage();
     MyProfilePage myProfile = new MyProfilePage();
 
+    @Epic(value = "AuthorizationPage")
+    @Feature("Profile.")
+    @Story("Information about my profile.")
+    @Description("Getting information on my profile")
 
     @Test
     public void MyProfile()  {

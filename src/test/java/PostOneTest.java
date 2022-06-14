@@ -1,4 +1,8 @@
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -9,6 +13,10 @@ public class PostOneTest extends BaseTest  {
     AuthorizationPage authorizationPage = new AuthorizationPage();
     MyProfilePage myProfile = new MyProfilePage();
 
+    @Epic(value = "AuthorizationPage")
+    @Feature("Post.")
+    @Story("Get one post.")
+    @Description("Get post by tag")
 
     @Test
     public void postOne() {

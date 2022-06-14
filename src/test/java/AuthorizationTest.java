@@ -1,4 +1,8 @@
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.Rule;
 import org.testng.annotations.Test;
 
@@ -13,8 +17,11 @@ public class AuthorizationTest extends BaseTest {
     MyProfilePage myProfile = new MyProfilePage();
     String avatar = "src/main/resources/avatar.jpeg";
     File file = new File(new File(avatar).getAbsolutePath());
-    @Rule
-    //public SoftAsserts softAsserts = new SoftAsserts();
+
+    @Epic(value = "AuthorizationPage")
+    @Feature("Authorization.")
+    @Story("Valid authorization.")
+    @Description("user authentication")
 
     @Test
     public void authorizationTest() {
