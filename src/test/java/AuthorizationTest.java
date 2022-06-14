@@ -29,7 +29,7 @@ public class AuthorizationTest extends BaseTest {
         authorizationPage.getAlertError().shouldBe(Condition.visible).shouldHave(text("password not valid"));
     }
 }
-ghghgh
+
 
 
 
