@@ -6,9 +6,7 @@ import org.openqa.selenium.By;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static com.codeborne.selenide.Selenide.$;
 
 public class AuthorizationPage {
     Method method = new Method();
@@ -102,6 +100,10 @@ public class AuthorizationPage {
 
     private SelenideElement selectPostTeg = Selenide.$x("//option[contains(text(),'Tags')]");
 
+    public SelenideElement getAlertError() {
+        return alertError;
+    }
+
     private SelenideElement alertError = Selenide.$(By.cssSelector(".Authorization_danger__2stU0"));
 
     public SelenideElement getHelloHeader() {
@@ -116,38 +118,42 @@ public class AuthorizationPage {
     public void registrationForm() {
         buttonSign.click();
         regTitle.shouldBe(Condition.visible);
-        emailInput.setValue("123@mail.ru");
+        emailInput.setValue(method.generateRandomHexString( 5) +"@mail.ru");
         loginInput.setValue("123456");
         passwordInput.setValue("000000");
-        avatarInput.shouldBe(Condition.visible).uploadFile(file);
+        buttonSave.click();
+
+    }
+    public void registrationForm1() {
+        buttonSign.click();
+        regTitle.shouldBe(Condition.visible);
+        emailInput.setValue("5236@mail.ru");
+        loginInput.setValue("123456");
+        passwordInput.setValue("000000");
         buttonSave.click();
 
     }
     public void negativeRegistrationForm() {
         buttonSign.click();
         regTitle.shouldBe(Condition.visible);
-        emailInput.setValue("123");
+        emailInput.setValue(method.generateRandomHexString( 5) +"@mail.ru");
         loginInput.setValue("1234567");
-        passwordInput.setValue("000000");
+        passwordInput.setValue("   ");
         avatarInput.shouldBe(Condition.visible).uploadFile(file);
         buttonSave.click();
-        alertError.shouldBe(Condition.visible).shouldHave(text("user email must be a well-formed email address"));
+
     }
 
-
     public void authorizationUser() {
-        emailInputUser.setValue("123@mail.ru");
+        emailInputUser.setValue(method.generateRandomHexString( 5) +"@mail.ru");
         passwordInputLoginUser.setValue("000000");
         buttonLogin.click();
-        helloHeader.shouldHave(text("Hello,"), text("1234567"));
-
     }
 
     public void authorizationUserNegative() {
-        emailInputUser.setValue("123@mail.ru");
+        emailInputUser.setValue(method.generateRandomHexString( 5) +"@mail.ru");
         passwordInputLoginUser.setValue("000001");
         buttonLogin.click();
-        alertError.shouldBe(Condition.visible).shouldHave(text("Password not valid"));
     }
 
     public void infoMyProfile() {
@@ -164,18 +170,11 @@ public class AuthorizationPage {
         selectPostTeg.click();
         inputSearch.setValue("#tag");
         buttonSearch.click();
-        elementOnPage.shouldBe(exist);
     }
     public void negativePostOne() {
         selectPost.click();
         selectPostTeg.click();
         inputSearch.setValue("1b4f");
         buttonSearch.click();
-        elementOnPage.shouldNotBe(visible);
     }
 }
-
-
-
-
-

@@ -1,5 +1,7 @@
+import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.open;
 
 public class CreatePostTest extends BaseTest  {
@@ -11,16 +13,17 @@ public class CreatePostTest extends BaseTest  {
     @Test
     public void createPost() {
         open(BASE_URL);
-        authorizationPage.authorizationUser();
+        authorizationPage.registrationForm();
         authorizationPage.infoMyProfile();
         myProfile.createNewPost();
+        myProfile.getElementOnPage().shouldBe(Condition.visible);
     }
     @Test
     public void negativeCreatePost() {
         open(BASE_URL);
-        authorizationPage.authorizationUser();
+        authorizationPage.registrationForm();
         authorizationPage.infoMyProfile();
         myProfile.negativeCreateNewPost();
+        myProfile.getStringErrorTags().shouldBe(Condition.visible).shouldHave(text("TAGS_NOT_VALID"));
     }
 }
-

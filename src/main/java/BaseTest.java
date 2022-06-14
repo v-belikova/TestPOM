@@ -16,7 +16,7 @@ abstract class BaseTest {
 
     @BeforeEach //запускается перед каждым тестовым методом
     public void start() {
-        Configuration.startMaximized = true; //настройка  окна браузера
+        //Configuration.startMaximized = true; //настройка  окна браузера
         Configuration.timeout = 10000;
         Configuration.headless = false;
     }

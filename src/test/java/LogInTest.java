@@ -1,7 +1,8 @@
+import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LogInTest extends BaseTest  {
     private final static String BASE_URL = "https://news-feed-2.dunice-testing.com/";
@@ -13,11 +14,15 @@ public class LogInTest extends BaseTest  {
     public void loginIn() {
         open(BASE_URL);
         authorizationPage.authorizationUser();
+        authorizationPage.getHelloHeader().shouldHave(text("Hello,"), text("1234567"));
     }
     @Test
     public void negativeAuthorizationTest(){
         open(BASE_URL);
         authorizationPage.authorizationUserNegative();
+        authorizationPage.getAlertError().shouldBe(Condition.visible).shouldHave(text("Password not valid"));
     }
 }
+
+
 

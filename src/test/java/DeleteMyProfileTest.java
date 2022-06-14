@@ -1,5 +1,6 @@
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.open;
 
 public class DeleteMyProfileTest extends BaseTest  {
@@ -10,8 +11,19 @@ public class DeleteMyProfileTest extends BaseTest  {
     @Test
     public void deleteProfile() {
         open(BASE_URL);
-        authorizationPage.authorizationUser();
+        authorizationPage.registrationForm();
         authorizationPage.infoMyProfile();
         myProfile.deleteUser();
+        authorizationPage.getHelloHeader().shouldBe(text("Hello,"));
+    }
+    @Test
+    public void deleteProfileNegative() {
+        open(BASE_URL);
+        authorizationPage.registrationForm();
+        authorizationPage.infoMyProfile();
+        myProfile.deleteUserNegative();
+        // authorizationPage.getHelloHeader().shouldBe(text("Hello,"));
     }
 }
+
+

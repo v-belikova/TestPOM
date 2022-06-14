@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -11,8 +12,9 @@ public class DeletePostTest extends BaseTest {
     @Test
     public void updatePost() {
         open(BASE_URL);
-        authorizationPage.authorizationUser();
+        authorizationPage.registrationForm();
         authorizationPage.infoMyProfile();
         myProfile.deletePost();
+        myProfile.getElementOnPage().shouldNot(Condition.visible);
     }
 }

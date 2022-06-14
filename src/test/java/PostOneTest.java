@@ -1,5 +1,7 @@
+import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 
 public class PostOneTest extends BaseTest  {
@@ -12,11 +14,14 @@ public class PostOneTest extends BaseTest  {
     public void postOne() {
         open(BASE_URL);
         authorizationPage.postOne();
+        myProfile.getElementOnPage().shouldBe(Condition.visible);
     }
     @Test
-    public void negativePostOne() throws InterruptedException {
+    public void negativePostOne() {
         open(BASE_URL);
         authorizationPage.negativePostOne();
+        myProfile.getElementOnPage().shouldNotBe(visible);
     }
 
 }
+

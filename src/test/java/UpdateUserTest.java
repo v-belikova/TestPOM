@@ -1,5 +1,7 @@
+import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.open;
 
 public class UpdateUserTest extends BaseTest  {
@@ -11,17 +13,21 @@ public class UpdateUserTest extends BaseTest  {
     @Test
     public void updateUser() {
         open(BASE_URL);
-        authorizationPage.authorizationUser();
+        authorizationPage.registrationForm();
         authorizationPage.infoMyProfile();
         myProfile.updateUser();
+        authorizationPage.getHelloHeader().shouldBe(text("Hello,"), text("123"));
+
+
     }
     @Test
-    public void negativeUpdateUser() throws InterruptedException {
+    public void negativeUpdateUser() {
         open(BASE_URL);
-        authorizationPage.authorizationUser();
+        authorizationPage.registrationForm();
         authorizationPage.infoMyProfile();
         myProfile.negativeUpdateUser();
-        Thread.sleep(5000);
+        myProfile.getStringError().shouldBe(Condition.visible).shouldHave(text("unknown"));
     }
 }
+
 
