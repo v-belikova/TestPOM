@@ -24,12 +24,12 @@ public class AllPostsTest extends BaseTest  {
         authorizationPage.allPost();
         myProfile.getElementOnPage().shouldBe(Condition.visible);
     }
-    @Test
+    /*@Test
     public void allPost1() {
         open(BASE_URL);
         authorizationPage.allPostPagination();
         myProfile.getElementOnPage().shouldBe(Condition.visible);
-    }
+    }*/
 
 }
 
