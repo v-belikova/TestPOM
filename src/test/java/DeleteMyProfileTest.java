@@ -22,7 +22,6 @@ public class DeleteMyProfileTest extends BaseTest  {
         authorizationPage.registrationForm();
         authorizationPage.infoMyProfile();
         myProfile.deleteUserNegative();
-        // authorizationPage.getHelloHeader().shouldBe(text("Hello,"));
     }
 }
 

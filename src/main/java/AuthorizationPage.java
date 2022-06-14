@@ -121,6 +121,7 @@ public class AuthorizationPage {
         emailInput.setValue(method.generateRandomHexString( 5) +"@mail.ru");
         loginInput.setValue("123456");
         passwordInput.setValue("000000");
+        avatarInput.shouldBe(Condition.visible).uploadFile(file);
         buttonSave.click();
 
     }

@@ -17,7 +17,7 @@ public class UpdatePostTest extends BaseTest  {
         authorizationPage.infoMyProfile();
         myProfile.createNewPost();
         myProfile.updatePost();
-        myProfile.getPostBody().shouldBe(text("Hello!"));
+        myProfile.getPostBody().shouldBe(text("Hello"));
     }
     @Test
     public void negativeUpdatePost() {
